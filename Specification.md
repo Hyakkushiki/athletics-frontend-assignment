@@ -7,7 +7,7 @@ Please follow all checkbox in 4 sections below as much as possible. (Tick/Un-tic
 
 ### 1. Tech stack.
 Its best to used our recommended stack as its our product tech stack.
- - [ ] Use [VueJS 3](https://v3.vuejs.org) or [NuxtJs](https://nuxtjs.org).
+ - [x] Use [VueJS 3](https://v3.vuejs.org) or [NuxtJs](https://nuxtjs.org).
  - [ ] Use [Typescript](https://www.typescriptlang.org/) as much as possible.
 
 ### 2. Knowledge of frontend architecture
@@ -19,7 +19,7 @@ Its best to used our recommended stack as its our product tech stack.
 
 ### 3. Ability to work with requirements
  - [ ] Follow all checkbox in [User story & Design](#user-story--design) section.
- - [ ] Follow the given design as close as possible ([design directory](/design))
+ - [x] Follow the given design as close as possible ([design directory](/design))
 
 ### 4. Communication skills and Explanation of your work
  - [ ] Write a concise and informative description on how u approach this assignment in [Description.md](/Description.md)

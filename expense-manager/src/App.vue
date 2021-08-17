@@ -1,27 +1,44 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App" />
+  <div>
+    <AddExpense />
+    <!-- <MyHeader /> -->
+    <!-- <MyFooter /> -->
+  </div>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
-import HelloWorld from "./components/HelloWorld.vue";
+import { defineComponent } from "@vue/runtime-core";
+import BaseHome from "./views/BaseHome.vue";
+import AddExpense from "./views/AddExpense.vue";
+import MyHeader from './components/MyHeader.vue';
+import MyFooter from './components/MyFooter.vue';
 
-@Options({
+export default defineComponent({
+  name: 'App',
   components: {
-    HelloWorld,
+    BaseHome,
+    AddExpense,
+    MyHeader,
+    MyFooter,
   },
+  setup(){
+
+  }
 })
-export default class App extends Vue {}
 </script>
 
 <style>
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
