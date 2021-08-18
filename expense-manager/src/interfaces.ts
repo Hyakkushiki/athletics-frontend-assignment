@@ -15,6 +15,7 @@ export interface Category {
 }
 
 export interface Expense {
+    id: string
     type: ExpenseTypeEnum
     category: Category
     date: Date

@@ -12,8 +12,8 @@
       </div>
     </div>
     <div v-else>
-      <button class="button cancel">{{labels.title1}}</button>
-      <button class="button add">{{labels.title2}}</button>
+      <button class="button cancel" >{{labels.title1}}</button>
+      <button class="button add" @click="pushCurrentExpense">{{labels.title2}}</button>
     </div>
   </div>
 </template>
@@ -32,9 +32,14 @@ export default defineComponent({
    },
    setup() {
     let selectedButton = ref(true)
+    const pushCurrentExpense = function(){
+      console.log('pushed out');
+      
+    }
 
     return {
         selectedButton,
+        pushCurrentExpense,
     }
   },
 });
