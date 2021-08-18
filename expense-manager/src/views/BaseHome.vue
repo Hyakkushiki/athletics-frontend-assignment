@@ -1,30 +1,37 @@
 <template>
   <div class="wrap">
-    <MyHeader />
-    <div class="content">
-    </div>
-    <MyFooter />
+    <MyHeader :labels="headerLabel"/>
+    <div class="content"></div>
+    <MyFooter :labels="footerLabel" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import MyHeader from '../components/MyHeader.vue'
-import MyFooter from '../components/MyFooter.vue'
+import { defineComponent } from "vue";
+import MyHeader from "../components/MyHeader.vue";
+import MyFooter from "../components/MyFooter.vue";
+import { NameLabel } from '../interfaces'
 
 export default defineComponent({
-  name: 'BaseHome',
+  name: "BaseHome",
   components: {
     MyHeader,
     MyFooter,
   },
-  props: {
-    labels: {
-      required: true,
-      type: Object
-    }
-  },
-})
+  setup() {
+    const headerLabel = {
+        title1: "Expense Tracking",
+        title2: "Add",
+      } as NameLabel
+
+    const footerLabel = {
+        title1: "Expense",
+        title2: "Category"
+      } as NameLabel
+
+    return { headerLabel, footerLabel }
+  }
+});
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

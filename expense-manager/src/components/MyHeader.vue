@@ -1,22 +1,24 @@
 <template>
   <div class="title">
-      <span>Expense Tracking</span>
-      <button class="add">Add</button>
+      <span>{{ labels.title1 }}</span>
+      <button v-if="!!labels.title2" class="add" @click="$router.push('AddExpense')">{{ labels.title2 }}</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from "vue";
+import { NameLabel } from "../interfaces";
 
 export default defineComponent({
-    name: 'MyHeader',
-    props: {
-
-    },
-    setup() {
-        
-    },
-})
+  name: "MyHeader",
+  props: {
+     labels: {
+      required: true,
+      type: Object as PropType<NameLabel>,
+     },
+   },
+  setup() {},
+});
 </script>
 
 <style scoped>

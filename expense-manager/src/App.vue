@@ -1,28 +1,19 @@
 <template>
-  <div>
-    <AddExpense />
-    <!-- <MyHeader /> -->
-    <!-- <MyFooter /> -->
-  </div>
+  <!-- <div id="nav">
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
+  </div> -->
+  <router-view />
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/runtime-core";
-import BaseHome from "./views/BaseHome.vue";
-import AddExpense from "./views/AddExpense.vue";
-import MyHeader from './components/MyHeader.vue';
-import MyFooter from './components/MyFooter.vue';
+import { defineComponent, provide } from "vue";
+import store from "./store";
 
 export default defineComponent({
   name: 'App',
-  components: {
-    BaseHome,
-    AddExpense,
-    MyHeader,
-    MyFooter,
-  },
   setup(){
-
+    provide('store', store)
   }
 })
 </script>
@@ -40,5 +31,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>
