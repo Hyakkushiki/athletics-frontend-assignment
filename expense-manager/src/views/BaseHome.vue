@@ -1,7 +1,13 @@
 <template>
   <div class="wrap">
     <MyHeader :labels="headerLabel"/>
-    <div class="content"></div>
+    <div class="content">
+      <Months
+            v-for="(month, index) in months"
+            :key="index"
+            :month="month.date"
+          />
+    </div>
     <MyFooter :labels="footerLabel" />
   </div>
 </template>
@@ -10,6 +16,7 @@
 import { defineComponent } from "vue";
 import MyHeader from "../components/MyHeader.vue";
 import MyFooter from "../components/MyFooter.vue";
+import Months from "../components/Months.vue";
 import { NameLabel } from '../interfaces'
 
 export default defineComponent({
@@ -17,6 +24,7 @@ export default defineComponent({
   components: {
     MyHeader,
     MyFooter,
+    Months,
   },
   setup() {
     const headerLabel = {
@@ -29,7 +37,16 @@ export default defineComponent({
         title2: "Category"
       } as NameLabel
 
-    return { headerLabel, footerLabel }
+    return {
+      headerLabel,
+      footerLabel,
+      months: [
+        { date: "5/2021" },
+        { date: "6/2021" },
+        { date: "7/2021" },
+        { date: "8/2021" },
+      ],
+      }
   }
 });
 </script>

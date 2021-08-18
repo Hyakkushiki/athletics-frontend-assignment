@@ -3,6 +3,11 @@ export enum ExpenseTypeEnum {
     CashOut = "Cash Out",
 }
 
+export interface StateObject {
+    currentExpense: Expense,
+    expensesArray: Expense[],
+    categories: Category[]
+}
 export interface NameLabel {
     title1: String;
     title2?: String;

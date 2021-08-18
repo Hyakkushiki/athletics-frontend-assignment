@@ -1,28 +1,33 @@
 <template>
   <div class="wrapping">
     <div class="title">Category</div>
-      <select v-model="selected" class="select">
-        <option v-for="option in options" :value="option.name" :key="option.order">
-          {{ option.name }}
+      <select v-model="currentCategory" class="select">
+        <option v-for="category in categories" :value="category" :key="category.order">
+          {{ category.name }}
         </option>
       </select>
-      {{ selected }}
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from "vue";
+import _ from "lodash";
+import { computed, defineComponent, inject, ref, WritableComputedRef } from "vue";
+import { Category, StateObject } from "../interfaces";
 
 export default defineComponent({
   setup() {
     const store: any = inject('store')
-    const selected = ref(store.state.categories[0].name)
-    const options = store.state.categories
+    const state: StateObject = store.state
+    const categories = _.orderBy(state.categories, ['order'],['asc'])
+
+    const currentCategory: WritableComputedRef<Category> = computed({
+        get() { return store.methods.getCurrentCategory()},
+        set(val) {store.methods.setCurrentCategory(val)}
+    })
     
     return {
-      selected,
-      options,
-      store
+      categories,
+      currentCategory
     }
   }
 })
@@ -35,6 +40,7 @@ export default defineComponent({
 .title {
   text-align: left;
   margin-left: 7.5%;
+  padding-bottom: 5px;
 }
 .select {
   color: black;

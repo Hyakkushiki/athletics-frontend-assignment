@@ -1,26 +1,26 @@
 <template>
   <div class="wrapping">
     <div class="title">Amount</div>
-    <input class="input" type="number" placeholder="1500" v-model="amount" required />
-    {{ amount }}
+    <input class="input" type="number" placeholder="1500" v-model="currentAmount" required />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, inject, ref } from "vue";
+import { computed, defineComponent, inject, WritableComputedRef } from "vue";
+import { StateObject } from "../interfaces";
 
 export default defineComponent({
   setup() {
     const store: any = inject('store')
-    const selected = store.state.categories[0].name
-    const options = store.state.categories
-    let amount = ref(store.state.expensesArray[0].amount)
+    const state: StateObject = store.state
+
+    const currentAmount:WritableComputedRef<number | undefined> = computed({
+        get() { return !!state.expensesArray[0] ? state.expensesArray[0].amount : undefined},
+        set(val) {store.methods.setCurrentAmount(val)}
+    })
     
     return {
-      selected,
-      options,
-      store,
-      amount,
+      currentAmount,
     }
   }
 })
@@ -33,6 +33,7 @@ export default defineComponent({
 .title {
   text-align: left;
   margin-left: 7.5%;
+  padding-bottom: 5px;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

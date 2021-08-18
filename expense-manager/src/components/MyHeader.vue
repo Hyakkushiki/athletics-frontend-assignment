@@ -1,12 +1,13 @@
 <template>
   <div class="title">
       <span>{{ labels.title1 }}</span>
-      <button v-if="!!labels.title2" class="add" @click="$router.push('AddExpense')">{{ labels.title2 }}</button>
+      <button v-if="!!labels.title2" class="add" @click="addButtonClicked">{{ labels.title2 }}</button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, inject, PropType } from "vue";
+import { useRouter, useRoute } from 'vue-router'
 import { NameLabel } from "../interfaces";
 
 export default defineComponent({
@@ -17,7 +18,20 @@ export default defineComponent({
       type: Object as PropType<NameLabel>,
      },
    },
-  setup() {},
+  setup() {
+    const store: any = inject('store')
+    const router = useRouter()
+    const route = useRoute()
+
+    function addButtonClicked() {
+      store.methods.createNewExpense()
+      router.push({
+        name: 'AddExpense',
+      })
+    }
+
+    return { addButtonClicked }
+  },
 });
 </script>
 

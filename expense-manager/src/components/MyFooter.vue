@@ -7,20 +7,21 @@
     <div v-else-if="labels.title1 === 'Cash in'">
       <div class="button-wrap">
         <div class="title">Type</div>
-        <button class="button cashin" v-bind:class="{selB: selectedButton }" v-on:click="selectedButton=true">{{labels.title1}}</button>
-        <button class="button cashout" v-bind:class="{selB: !selectedButton }" v-on:click="selectedButton=false">{{labels.title2}}</button>
+        <button class="button cashin" v-bind:class="{selB: selectedButton }" v-on:click="cashIn">{{labels.title1}}</button>
+        <button class="button cashout" v-bind:class="{selB: !selectedButton }" v-on:click="cashOut">{{labels.title2}}</button>
       </div>
     </div>
     <div v-else>
-      <button class="button cancel" >{{labels.title1}}</button>
-      <button class="button add" @click="pushCurrentExpense">{{labels.title2}}</button>
+      <button class="button cancel"  @click="cancelExpenseClicked">{{labels.title1}}</button>
+      <button class="button add" @click="addExpenseClicked">{{labels.title2}}</button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from "vue";
-import { NameLabel } from "../interfaces";
+import { defineComponent, inject, PropType, ref } from "vue";
+import { useRouter } from "vue-router";
+import { ExpenseTypeEnum, NameLabel } from "../interfaces";
 
 export default defineComponent({
   name: "MyFooter",
@@ -31,15 +32,42 @@ export default defineComponent({
        }
    },
    setup() {
+    const store: any = inject('store')
+    const router = useRouter()
     let selectedButton = ref(true)
-    const pushCurrentExpense = function(){
-      console.log('pushed out');
-      
+
+    function cashIn() {
+      selectedButton.value = true
+      store.methods.setCurrentType(ExpenseTypeEnum.CashIn)
+    }
+    function cashOut() {
+      selectedButton.value = false
+      store.methods.setCurrentType(ExpenseTypeEnum.CashOut)
+    }
+
+    function cancelExpenseClicked() {
+      router.push({
+        name: 'BaseHome',
+      })
+    }
+    function addExpenseClicked() {
+      console.log('add button clicked');
+      console.log(store.state.currentExpense);
+      console.log(store.state.expensesArray);
+
+      store.methods.pushCurrrentExpense()
+      router.push({
+        name: 'BaseHome',
+      })
+      console.log(store.state.expensesArray);
     }
 
     return {
         selectedButton,
-        pushCurrentExpense,
+        addExpenseClicked,
+        cancelExpenseClicked,
+        cashIn,
+        cashOut,
     }
   },
 });
@@ -84,6 +112,7 @@ export default defineComponent({
 .button-wrap {
   padding: 0px;
   margin: 0px;
+  padding-top: 30px;
 }
 .cashin {
   width: 42.5%;
@@ -103,6 +132,7 @@ export default defineComponent({
 .title {
   text-align: left;
   margin-left: 7.5%;
+  padding-bottom: 5px;
 }
 .selB {
   background-color: #4b97f2;

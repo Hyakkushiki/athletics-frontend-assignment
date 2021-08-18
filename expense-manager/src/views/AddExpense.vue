@@ -6,6 +6,8 @@
       <my-footer :labels="{title1: 'Cash in', title2: 'Cash out'}" />
       <SelectForm />
       <CurrencyForm />
+      <DateForm />
+      <DescriptionForm />
       <TextForm inputType='Amount'/>
       <TextForm inputType="Date"/>
       <TextForm inputType="Description"/>
@@ -22,6 +24,8 @@ import MyFooter from "../components/MyFooter.vue";
 import BaseForms from "../components/BaseForms.vue";
 import SelectForm from "../components/SelectForm.vue";
 import CurrencyForm from "../components/CurrencyForm.vue";
+import DateForm from "../components/DateForm.vue";
+import DescriptionForm from "../components/DescriptionForm.vue";
 
 export default defineComponent({
   name: "AddExpense",
@@ -31,6 +35,8 @@ export default defineComponent({
     BaseForms,
     SelectForm,
     CurrencyForm,
+    DateForm,
+    DescriptionForm,
   },
   // setup() {},
 });
