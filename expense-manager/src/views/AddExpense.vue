@@ -21,7 +21,6 @@
 import { defineComponent } from "vue";
 import MyHeader from "../components/MyHeader.vue";
 import MyFooter from "../components/MyFooter.vue";
-import BaseForms from "../components/BaseForms.vue";
 import SelectForm from "../components/SelectForm.vue";
 import CurrencyForm from "../components/CurrencyForm.vue";
 import DateForm from "../components/DateForm.vue";
@@ -32,7 +31,6 @@ export default defineComponent({
   components: {
     MyHeader,
     MyFooter,
-    BaseForms,
     SelectForm,
     CurrencyForm,
     DateForm,

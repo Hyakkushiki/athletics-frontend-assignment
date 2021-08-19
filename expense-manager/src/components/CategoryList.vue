@@ -1,5 +1,5 @@
 <template>
-  <div class="month">
+  <div class="category">
     <div class="expense">{{expense}}</div>
     <div class="total">-3024</div>
   </div>
@@ -17,35 +17,35 @@ export default defineComponent({
     const store: any = inject('store')
     const state: StateObject = store.state
 
-    const currentDate:WritableComputedRef<Date> = computed({
-        get() { return store.methods.getCurrentDate() },
-        set(val) { store.methods.setCurrentDate(val) }
-    })
+    // const currentDate:WritableComputedRef<Date> = computed({
+    //     get() { return store.methods.getCurrentDate() },
+    //     set(val) { store.methods.setCurrentDate(val) }
+    // })
     
     return {
-      currentDate,
+      // currentDate,
     }
   }
 })
 </script>
 
 <style scoped>
-.month {
+.category {
   display: inline-block;
   color: #4b97f2;
-  padding: 15px 0px;
+  padding: 15px 0px 5px 0px;
   width: 85%;
-  font-size: 16px;
+  /* font-size: 16px; */
   border-bottom: 2px solid;
 }
 .expense {
   display: inline-block;
-  width: 50%;
+  width: 47%;
   text-align: left;
 }
 .total {
   display: inline-block;
-  width: 50%;
+  width: 47%;
   text-align: right;
 }
 </style>

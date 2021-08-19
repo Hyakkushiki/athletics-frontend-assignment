@@ -6,7 +6,8 @@ export enum ExpenseTypeEnum {
 export interface StateObject {
     currentExpense: Expense,
     expensesArray: Expense[],
-    categories: Category[]
+    categories: Category[],
+    filled: boolean[]
 }
 export interface NameLabel {
     title1: String;
@@ -21,10 +22,10 @@ export interface Category {
 
 export interface Expense {
     id: string
-    type: ExpenseTypeEnum
-    category: Category
-    date: Date
-    amount: number
+    type: {type: ExpenseTypeEnum, isSet: boolean}
+    category: {category: Category, isSet: boolean}
+    date: {date: Date, isSet: boolean}
+    amount: {amount: number, isSet: boolean}
     description: string
 }
 

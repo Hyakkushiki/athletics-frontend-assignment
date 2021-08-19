@@ -15,6 +15,7 @@ const defaultExpense = {
 const state = reactive({
     currentExpense: {} as Expense,
     expensesArray: [] as Expense[],
+    filled: [ false, false, false, false ],
     categories: [
         { isMain: true, order: 1, name: "Food" },
         { isMain: true, order: 2, name: "Transportation" },
@@ -30,6 +31,7 @@ const methods = {
     },
     pushCurrrentExpense(){
         state.expensesArray.push(state.currentExpense)
+        state.categories = _.orderBy(state.categories, ['date'],['asc'])
     },
 
     setCurrentAmount(val: number){
@@ -48,6 +50,7 @@ const methods = {
         return state.currentExpense.date;        
     },
     setCurrentDate(val: Date){
+
         state.currentExpense.date = val;        
     },
 
@@ -59,6 +62,7 @@ const methods = {
     },
 
     setCurrentType(val: ExpenseTypeEnum){
+        state.filled[0] = true;
         state.currentExpense.type = val;        
     },
 }

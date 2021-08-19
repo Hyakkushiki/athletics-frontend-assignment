@@ -16,9 +16,12 @@
 <script lang="ts">
 import { computed, defineComponent, inject, WritableComputedRef } from "vue";
 import { StateObject } from "../interfaces";
-import CategoryList from "../components/CategoryList.vue";
+import CategoryList from "./CategoryList.vue";
 
 export default defineComponent({
+  components: {
+    CategoryList,
+  },
   props: {
     month: String,
   },
@@ -26,14 +29,16 @@ export default defineComponent({
     const store: any = inject('store')
     const state: StateObject = store.state
 
-    const currentDate:WritableComputedRef<Date> = computed({
-        get() { return store.methods.getCurrentDate() },
-        set(val) { store.methods.setCurrentDate(val) }
-    })
+    // const currentDate:WritableComputedRef<Date> = computed({
+    //     get() { return store.methods.getCurrentDate() },
+    //     set(val) { store.methods.setCurrentDate(val) }
+    // })
+
+    const items = [{ message: "Foo" }, { message: "Bar" }]
     
     return {
-      currentDate,
-      CategoryList,
+      // currentDate,
+      items,
     }
   }
 })

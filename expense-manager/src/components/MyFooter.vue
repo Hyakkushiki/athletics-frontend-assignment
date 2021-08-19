@@ -34,7 +34,7 @@ export default defineComponent({
    setup() {
     const store: any = inject('store')
     const router = useRouter()
-    let selectedButton = ref(true)
+    let selectedButton = ref(false) // cash out items than cash in items
 
     function cashIn() {
       selectedButton.value = true
