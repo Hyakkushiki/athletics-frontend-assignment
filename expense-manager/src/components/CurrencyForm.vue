@@ -14,9 +14,9 @@ export default defineComponent({
     const store: any = inject('store')
     const state: StateObject = store.state
 
-    const currentAmount:WritableComputedRef<number | undefined> = computed({
-        get() { return !!state.expensesArray[0] ? state.expensesArray[0].amount : undefined},
-        set(val) {store.methods.setCurrentAmount(val)}
+    const currentAmount:WritableComputedRef<number> = computed({
+        get() { return state.currentExpense.amount },
+        set(val) { store.methods.setCurrentAmount(val) }
     })
     
     return {

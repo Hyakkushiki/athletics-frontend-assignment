@@ -14,8 +14,12 @@ export default defineComponent({
     const store: any = inject('store')
     const state: StateObject = store.state
 
-    const currentDate:WritableComputedRef<Date> = computed({
-        get() { return store.methods.getCurrentDate() },
+    const currentDate = computed({
+        get() {
+          const dateObj: Date = store.methods.getCurrentDate()
+          const dateString: string = dateObj.getFullYear() + '-0' + (dateObj.getMonth().valueOf()+1) + '-' + dateObj.getDate()
+          return dateString
+          },
         set(val) { store.methods.setCurrentDate(val) }
     })
     

@@ -13,7 +13,7 @@
     </div>
     <div v-else>
       <button class="button cancel"  @click="cancelExpenseClicked">{{labels.title1}}</button>
-      <button class="button add" @click="addExpenseClicked">{{labels.title2}}</button>
+      <button class="button add" v-bind:class="{addClickable: clickable() }" @click="addExpenseClicked">{{labels.title2}}</button>
     </div>
   </div>
 </template>
@@ -21,7 +21,7 @@
 <script lang="ts">
 import { defineComponent, inject, PropType, ref } from "vue";
 import { useRouter } from "vue-router";
-import { ExpenseTypeEnum, NameLabel } from "../interfaces";
+import { ExpenseTypeEnum, NameLabel, StateObject } from "../interfaces";
 
 export default defineComponent({
   name: "MyFooter",
@@ -33,8 +33,11 @@ export default defineComponent({
    },
    setup() {
     const store: any = inject('store')
+    const state: StateObject = store.state
     const router = useRouter()
     let selectedButton = ref(false) // cash out items than cash in items
+
+    const clickable = function() {return store.methods.getisSetValue()}
 
     function cashIn() {
       selectedButton.value = true
@@ -51,15 +54,12 @@ export default defineComponent({
       })
     }
     function addExpenseClicked() {
-      console.log('add button clicked');
-      console.log(store.state.currentExpense);
-      console.log(store.state.expensesArray);
-
-      store.methods.pushCurrrentExpense()
-      router.push({
-        name: 'BaseHome',
-      })
-      console.log(store.state.expensesArray);
+      if (clickable()) {
+        store.methods.pushCurrrentExpense()
+        router.push({
+          name: 'BaseHome',
+        })
+      }
     }
 
     return {
@@ -68,6 +68,7 @@ export default defineComponent({
         cancelExpenseClicked,
         cashIn,
         cashOut,
+        clickable
     }
   },
 });
@@ -103,10 +104,13 @@ export default defineComponent({
 .add {
   width: 45%;
   color: white;
-  background-color: #4b97f2;
+  background-color: #6f7780;
   margin-left: 5px;
   margin-bottom: 10px;
   padding: 5px;
+}
+.addClickable {
+  background-color: #4b97f2;
 }
 
 .button-wrap {
